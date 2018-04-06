@@ -1,8 +1,7 @@
-TodoLocalized (Xamarin.Forms)
+TodoLocalized RTL (Xamarin.Forms)
 =============
 
-A complete application that demonstrates the localization concepts from [this developer portal page](http://developer.xamarin.com/guides/cross-platform/xamarin-forms/localization/),
-and its [sample code](https://github.com/xamarin/xamarin-forms-samples/tree/master/UsingResxLocalization).
+Demonstrates how to use the `FlowDirection` feature in Xamarin.Forms 3.0.0 to get a fully localized app.
 
 This sample uses [Multilingual App Toolkit (MAT) from Microsoft](https://dev.windows.com/en-us/develop/multilingual-app-toolkit) (specifically the [v4.0 Technical Preview](https://visualstudiogallery.msdn.microsoft.com/6dab9154-a7e1-46e4-bbfa-18b5e81df520))to localize a Xamarin.Forms application for iOS, Android, and Windows Phone. You do NOT need MAT to build or run this sample.
 
