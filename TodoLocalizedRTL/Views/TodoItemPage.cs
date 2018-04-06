@@ -23,6 +23,7 @@ namespace TodoLocalized
 
 			var doneLabel = new Label (); // no Text! localized later
 			var doneEntry = new Switch ();
+			doneEntry.FlowDirection = FlowDirection.LeftToRight;
 			doneEntry.SetBinding (Switch.IsToggledProperty, "Done");
 
 			var saveButton = new Button (); // no Text! localized later
