@@ -33,6 +33,13 @@
 		<string>Icon</string>
 		<string>Icon-Small</string>
 	</array>
+	<key>CFBundleDevelopmentRegion</key> 
+	<string>en</string> 
+	<key>CFBundleLocalizations</key> 
+	<array> 
+		<string>en</string> 
+		<string>ar</string> 
+	</array>
 	<key>CFBundleDisplayName</key>
 	<string>TodoLocalized</string>
 	<key>UILaunchStoryboardName</key>
