@@ -13,6 +13,8 @@ namespace TodoLocalized
 		ListView listView;
 		public TodoListPage ()
 		{
+			FlowDirection = Device.FlowDirection;
+
 			Title = AppResources.ApplicationTitle; // "Todo";
 
 			listView = new ListView { RowHeight = 40 };

@@ -7,6 +7,8 @@ namespace TodoLocalized
 	{
 		public TodoItemPage ()
 		{
+			FlowDirection = Device.FlowDirection;
+
 			this.SetBinding (ContentPage.TitleProperty, "Name");
 
 			NavigationPage.SetHasNavigationBar (this, true);
