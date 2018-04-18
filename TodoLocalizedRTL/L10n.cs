@@ -1,44 +1,26 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
 using Xamarin.Forms;
+using System;
 
 namespace TodoLocalized
 {
     public class L10n
-	{
+    {
         const string ResourceId = "TodoLocalized.Resx.AppResources";
+        static readonly Lazy<ResourceManager> ResMgr = new Lazy<ResourceManager>(() => new ResourceManager(ResourceId, IntrospectionExtensions.GetTypeInfo(typeof(TranslateExtension)).Assembly));
 
-        public static void SetLocale (CultureInfo ci)
+        public static string Localize(string key, CultureInfo ci)
         {
-            DependencyService.Get<ILocale>().SetLocale(ci);
-		}
-
-		/// <remarks>
-		/// Maybe we can cache this info rather than querying every time
-		/// </remarks>
-		[Obsolete]
-		public static string Locale ()
-		{
-			return DependencyService.Get<ILocale>().GetCurrentCultureInfo().ToString();
-        }
-			
-		public static string Localize(string key, string comment)
-        {
-            //var netLanguage = Locale ();
-
-            // Platform-specific
-            ResourceManager temp = new ResourceManager(ResourceId, typeof(L10n).GetTypeInfo().Assembly);
             Debug.WriteLine("Localize " + key);
-            string result = temp.GetString(key, DependencyService.Get<ILocale>().GetCurrentCultureInfo());
-
+            string result = ResMgr.Value.GetString(key, ci);
             if (result == null)
             {
-                result = key; // HACK: return the key, which GETS displayed to the user
+                result = key;
             }
             return result;
-		}
-	}
+        }
+    }
 }

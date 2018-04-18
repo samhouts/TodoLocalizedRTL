@@ -1,32 +1,31 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 using TodoLocalized.Resx;
-using System.Globalization;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TodoLocalized
 {
-	public class App : Application
-	{
-		static TodoItemDatabase database;
+    public class App : Application
+    {
+        static TodoItemDatabase database;
 
-		public App ()
-		{
-			var ci = DependencyService.Get<ILocale>().GetCurrentCultureInfo();
-			L10n.SetLocale (ci);
-			AppResources.Culture = ci;
-            
-			var mainNav = new NavigationPage (new TodoListPage ());
-			MainPage = mainNav;
-		}
+        public App()
+        {
+            AppResources.Culture = DependencyService.Get<ILocale>().GetCurrentCultureInfo();
+            MainPage = new NavigationPage(new TodoListPageXaml());
+        }
 
-		public static TodoItemDatabase Database {
-			get { 
-				if (database == null) {
-					database = new TodoItemDatabase ();
-				}
-				return database; 
-			}
-		}
-	}
+        public static TodoItemDatabase Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new TodoItemDatabase();
+                }
+                return database;
+            }
+        }
+    }
 }
 

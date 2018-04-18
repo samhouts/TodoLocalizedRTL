@@ -4,83 +4,80 @@ using Xamarin.Forms;
 namespace TodoLocalized
 {
     public class TodoItemPage : ContentPage
-	{
-		public TodoItemPage ()
-		{
-			FlowDirection = Device.FlowDirection;
+    {
+        public TodoItemPage()
+        {
+            FlowDirection = Device.FlowDirection;
 
-			this.SetBinding (ContentPage.TitleProperty, "Name");
+            this.SetBinding(Page.TitleProperty, "Name");
 
-			NavigationPage.SetHasNavigationBar (this, true);
-			var nameLabel = new Label (); // no Text! localized later
-			var nameEntry = new Entry ();
-			
-			nameEntry.SetBinding (Entry.TextProperty, "Name");
+            NavigationPage.SetHasNavigationBar(this, true);
+            var nameLabel = new Label(); // no Text! localized later
+            var nameEntry = new Entry();
 
-			var notesLabel = new Label (); // no Text! localized later
-			var notesEntry = new Entry ();
-			notesEntry.SetBinding (Entry.TextProperty, "Notes");
+            nameEntry.SetBinding(Entry.TextProperty, "Name");
 
-			var doneLabel = new Label (); // no Text! localized later
-			var doneEntry = new Switch ();
-			doneEntry.FlowDirection = FlowDirection.LeftToRight;
-			doneEntry.SetBinding (Switch.IsToggledProperty, "Done");
+            var notesLabel = new Label(); // no Text! localized later
+            var notesEntry = new Entry();
+            notesEntry.SetBinding(Entry.TextProperty, "Notes");
 
-			var saveButton = new Button (); // no Text! localized later
-			saveButton.Clicked += (sender, e) => {
-				var todoItem = (TodoItem)BindingContext;
-				App.Database.SaveItem(todoItem);
-				this.Navigation.PopAsync();
-			};
+            var doneLabel = new Label(); // no Text! localized later
+            var doneEntry = new Switch();
+            doneEntry.SetBinding(Switch.IsToggledProperty, "Done");
 
-			var deleteButton = new Button (); // no Text! localized later
-			deleteButton.Clicked += (sender, e) => {
-				var todoItem = (TodoItem)BindingContext;
-				App.Database.DeleteItem(todoItem.ID);
-                this.Navigation.PopAsync();
-			};
-							
-			var cancelButton = new Button (); // no Text! localized later
-			cancelButton.Clicked += (sender, e) => {
-                this.Navigation.PopAsync();
-			};
+            var saveButton = new Button(); // no Text! localized later
+            saveButton.Clicked += async (sender, e) =>
+            {
+                var todoItem = (TodoItem)BindingContext;
+                App.Database.SaveItem(todoItem);
+                await Navigation.PopAsync();
+            };
 
-			var speakButton = new Button (); // no Text! localized later
-			speakButton.Clicked += (sender, e) => {
-				var todoItem = (TodoItem)BindingContext;
-				DependencyService.Get<ITextToSpeech>().Speak(todoItem.Name + " " + todoItem.Notes);
-			};
+            var deleteButton = new Button(); // no Text! localized later
+            deleteButton.Clicked += async (sender, e) =>
+            {
+                var todoItem = (TodoItem)BindingContext;
+                App.Database.DeleteItem(todoItem.ID);
+                await Navigation.PopAsync();
+            };
+
+            var cancelButton = new Button(); // no Text! localized later
+            cancelButton.Clicked += async (sender, e) =>
+            {
+                await Navigation.PopAsync();
+            };
+
+            var speakButton = new Button(); // no Text! localized later
+            speakButton.Clicked += (sender, e) =>
+            {
+                var todoItem = (TodoItem)BindingContext;
+                DependencyService.Get<ITextToSpeech>().Speak(todoItem.Name + " " + todoItem.Notes);
+            };
 
 
-			// TODO: Forms Localized text using two different methods:
+            // TODO: Forms Localized text using two different methods:
 
-			// refer to the codebehind for AppResources.resx.designer
-			nameLabel.Text = AppResources.NameLabel;
-			notesLabel.Text = AppResources.NotesLabel;
-			doneLabel.Text = AppResources.DoneLabel;
+            // refer to the codebehind for AppResources.resx.designer
+            nameLabel.Text = AppResources.NameLabel;
+            notesLabel.Text = AppResources.NotesLabel;
+            doneLabel.Text = AppResources.DoneLabel;
 
-			// using ResourceManager
-			saveButton.Text = AppResources.SaveButton;
-			deleteButton.Text = L10n.Localize ("DeleteButton", "Delete");
-			cancelButton.Text = L10n.Localize ("CancelButton", "Cancel");
-			speakButton.Text = L10n.Localize ("SpeakButton", "Speak");
+            // using ResourceManager
+            saveButton.Text = AppResources.SaveButton;
+            deleteButton.Text = L10n.Localize("DeleteButton", AppResources.Culture);
+            cancelButton.Text = L10n.Localize("CancelButton", AppResources.Culture);
+            speakButton.Text = L10n.Localize("SpeakButton", AppResources.Culture);
 
-			// HACK: included as a 'test' for localizing the picker
-			// currently not saved to database
-			//var dueDateLabel = new Label { Text = "Due" };
-			//var dueDatePicker = new DatePicker ();
-
-			Content = new StackLayout {
-				VerticalOptions = LayoutOptions.StartAndExpand,
-				Padding = new Thickness(20),
-				Children = {
-					nameLabel, nameEntry, 
-					notesLabel, notesEntry,
-					doneLabel, doneEntry,
-					//dueDateLabel, dueDatePicker,
-					saveButton, deleteButton, cancelButton, speakButton
-				}
-			};
-		}
-	}
+            Content = new StackLayout
+            {
+                Margin = new Thickness(20),
+                Children = {
+                    nameLabel, nameEntry,
+                    notesLabel, notesEntry,
+                    doneLabel, doneEntry,
+                    saveButton, deleteButton, cancelButton, speakButton
+                }
+            };
+        }
+    }
 }

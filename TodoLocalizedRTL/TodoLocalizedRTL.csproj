@@ -30,6 +30,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="ViewsXaml\TodoItemPageXaml.xaml.cs">
+      <DependentUpon>TodoItemPageXaml.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

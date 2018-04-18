@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using TodoLocalized.UWP;
 using Xamarin.Forms;
 
@@ -8,15 +7,9 @@ namespace TodoLocalized.UWP
 {
     public class Localize : ILocale
     {
-        public System.Globalization.CultureInfo GetCurrentCultureInfo()
+        public CultureInfo GetCurrentCultureInfo()
         {
-            return new System.Globalization.CultureInfo(
-				Windows.System.UserProfile.GlobalizationPreferences.Languages[0].ToString());
-        }
-
-        public void SetLocale(System.Globalization.CultureInfo ci)
-        {
-            // Do nothing
+            return CultureInfo.CurrentUICulture;
         }
     }
 }

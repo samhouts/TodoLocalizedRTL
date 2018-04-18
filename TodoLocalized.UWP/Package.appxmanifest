@@ -25,7 +25,7 @@
 
   <Resources>
     <Resource Language="x-generate"/>
-    <Resource Language="en" />  
+    <Resource Language="en" />
     <Resource Language="ar" />
   </Resources>
 
